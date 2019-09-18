@@ -34,6 +34,7 @@ ls -l example
 This project is inspired by:
 
 - https://github.com/benbjohnson/peapod
+- https://github.com/prometheus/common/blob/master/version/info.go
 - https://golang.org/src/encoding
 - https://golang.org/src/encoding/base64/base64.go
 - https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1
