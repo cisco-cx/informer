@@ -25,9 +25,19 @@ ls -l example
 * Step 4: Call `v1.NewInfoService` and pass in your global vars as args to it.
 * Step 5: Use the various methods on the `informer.InfoService` interface as you wish.
 
+## Metrics
+
+Exceprt of an HTTP GET response from a program that implements Informer:
+
+```
+# TYPE informer_go gauge
+informer_go{branch="master",build_date="2019-09-18T19:50:30+0000",build_user="vagrant",go_version="go1.12.7",license="Apache-2.0",program="example",revision="f2211ec",url="https://github.com/cisco-cx/informer/example",version="f2211ec"} 1
+```
+
 ## Roadmap
 
-* Expose a Prometheus Collector.
+* Demonstrate the optional InfoCollector in the example directory.
+* Use the shared `mock` package in `v1_test` package.
 
 ## Credit
 

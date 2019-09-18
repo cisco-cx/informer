@@ -38,7 +38,11 @@
 // SOFTWARE.
 package v1
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/prometheus/client_golang/prometheus"
+)
 
 // InfoService represents the v1 implementation of InfoService.
 type InfoService struct {
@@ -90,4 +94,39 @@ func (s *InfoService) String() string {
 // VersionInfo returns version information as a string.
 func (s *InfoService) VersionInfo() string {
 	return fmt.Sprintf("(version=%s, branch=%s, revision=%s)", s.Version, s.Branch, s.Revision)
+}
+
+// NewCollector returns a collector that exports metrics about current version information.
+func (s *InfoService) NewCollector() *prometheus.GaugeVec {
+	c := prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "informer",
+			Name:      "go",
+			Help: fmt.Sprintf("A metric with a constant '1' value labeled by metadata, version and build" +
+				" information for Go programs."),
+		},
+		[]string{
+			"program",
+			"license",
+			"url",
+			"build_user",
+			"build_date",
+			"go_version",
+			"version",
+			"revision",
+			"branch",
+		},
+	)
+	c.WithLabelValues(
+		s.Program,
+		s.License,
+		s.URL,
+		s.BuildUser,
+		s.BuildDate,
+		s.GoVersion,
+		s.Version,
+		s.Revision,
+		s.Branch,
+	).Set(1)
+	return c
 }

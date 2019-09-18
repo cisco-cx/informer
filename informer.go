@@ -39,6 +39,8 @@
 
 package informer
 
+import "github.com/prometheus/client_golang/prometheus"
+
 // InfoService is a domain interface that represents a service for exposing build and version information.
 type InfoService interface {
 	// BuildInfo returns build information as a string.
@@ -54,10 +56,9 @@ type InfoService interface {
 	VersionInfo() string
 }
 
-/* TODO
-// InformerCollector represents a service for exposing build and version information as a metrics collector.
+// InformerCollector is an optional extension to InfoService that represents the ability to expose metadata, build and
+// version information as a metrics collector.
 type InfoCollector interface {
-    // Collector returns a metrics collector that exports metrics for build and version information.
-    Collector() *GaugeVec
+	// NewCollector returns a collector that exports metrics about current version information.
+	NewCollector() *prometheus.GaugeVec
 }
-*/
