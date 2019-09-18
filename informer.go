@@ -59,6 +59,6 @@ type InfoService interface {
 // InformerCollector is an optional extension to InfoService that represents the ability to expose metadata, build and
 // version information as a metrics collector.
 type InfoCollector interface {
-	// NewCollector returns a collector that exports metrics about current version information.
+	// NewCollector returns a collector that exports metrics about current InfoService information.
 	NewCollector() *prometheus.GaugeVec
 }

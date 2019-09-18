@@ -96,7 +96,7 @@ func (s *InfoService) VersionInfo() string {
 	return fmt.Sprintf("(version=%s, branch=%s, revision=%s)", s.Version, s.Branch, s.Revision)
 }
 
-// NewCollector returns a collector that exports metrics about current version information.
+// NewCollector returns a collector that exports metrics about current InfoService information.
 func (s *InfoService) NewCollector() *prometheus.GaugeVec {
 	c := prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{

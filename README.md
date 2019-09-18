@@ -27,7 +27,7 @@ ls -l example
 
 ## Metrics
 
-Exceprt of an HTTP GET response from a program that implements Informer:
+Excerpt of an HTTP GET response from a program that implements Informer:
 
 ```
 # TYPE informer_go gauge
