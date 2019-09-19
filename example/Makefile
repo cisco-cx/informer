@@ -1,7 +1,6 @@
 # based in part on: https://povilasv.me/exposing-go-modules-to-prometheus/
 PROGRAM := example
 PACKAGE := github.com/cisco-cx/informer/$(PROGRAM)
-GO_VERSION :=$(shell go version)
 LICENSE := Apache-2.0
 URL     := https://$(PACKAGE)
 DATE := $(shell date +%FT%T%z)

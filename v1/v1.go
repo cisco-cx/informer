@@ -51,9 +51,10 @@ type InfoService struct {
 	License string
 	URL     string
 	// Build information.
-	BuildUser string
-	BuildDate string
-	GoVersion string
+	BuildUser       string
+	BuildDate       string
+	Language        string
+	LanguageVersion string
 	// Version information.
 	Version  string
 	Revision string
@@ -61,24 +62,25 @@ type InfoService struct {
 }
 
 // NewInfoService returns a new InfoService.
-func NewInfoService(program, license, url, buildUser, buildDate, goVersion,
+func NewInfoService(program, license, url, buildUser, buildDate, language, languageVersion,
 	version, revision, branch string) *InfoService {
 	return &InfoService{
-		Program:   program,
-		License:   license,
-		URL:       url,
-		BuildUser: buildUser,
-		BuildDate: buildDate,
-		GoVersion: goVersion,
-		Version:   version,
-		Revision:  revision,
-		Branch:    branch,
+		Program:         program,
+		License:         license,
+		URL:             url,
+		BuildUser:       buildUser,
+		BuildDate:       buildDate,
+		Language:        language,
+		LanguageVersion: languageVersion,
+		Version:         version,
+		Revision:        revision,
+		Branch:          branch,
 	}
 }
 
 // BuildInfo returns build information as a string.
 func (s *InfoService) BuildInfo() string {
-	return fmt.Sprintf("(go=%s, user=%s, date=%s)", s.GoVersion, s.BuildUser, s.BuildDate)
+	return fmt.Sprintf("(language=%s, languageVersion=%s, user=%s, date=%s)", s.Language, s.LanguageVersion, s.BuildUser, s.BuildDate)
 }
 
 // Metadata returns metadata as a string.
@@ -100,10 +102,10 @@ func (s *InfoService) VersionInfo() string {
 func (s *InfoService) NewCollector() *prometheus.GaugeVec {
 	c := prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Namespace: "informer",
-			Name:      "go",
+			Namespace: "program",
+			Name:      "info",
 			Help: fmt.Sprintf("A metric with a constant '1' value labeled by metadata, version and build" +
-				" information for Go programs."),
+				" information for programs."),
 		},
 		[]string{
 			"program",
@@ -111,7 +113,8 @@ func (s *InfoService) NewCollector() *prometheus.GaugeVec {
 			"url",
 			"build_user",
 			"build_date",
-			"go_version",
+			"language",
+			"language_version",
 			"version",
 			"revision",
 			"branch",
@@ -123,7 +126,8 @@ func (s *InfoService) NewCollector() *prometheus.GaugeVec {
 		s.URL,
 		s.BuildUser,
 		s.BuildDate,
-		s.GoVersion,
+		s.Language,
+		s.LanguageVersion,
 		s.Version,
 		s.Revision,
 		s.Branch,

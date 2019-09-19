@@ -14,7 +14,7 @@ make
 ls -l example
 # -rwxr-xr-x 1 vagrant vagrant 1423424 Sep 18 19:50 example
 ./example
-# (metadata=(program=example, license=Apache-2.0, url=https://github.com/cisco-cx/informer/example), versionInfo=(version=f2211ec, branch=master, revision=f2211ec), buildInfo=(go=go1.12.7, user=vagrant, date=2019-09-18T19:50:30+0000))
+# (metadata=(program=example, license=Apache-2.0, url=https://github.com/cisco-cx/informer/example), versionInfo=(version=f2211ec, branch=master, revision=f2211ec), buildInfo=(language=go, languageVersion=go1.12.7, user=vagrant, date=2019-09-18T19:50:30+0000))
 ```
 
 ## Usage
@@ -27,11 +27,11 @@ ls -l example
 
 ## Metrics
 
-Excerpt of an HTTP GET response from a program that implements Informer:
+Excerpt of an HTTP GET response from a program that implements the Informer pattern:
 
 ```
-# TYPE informer_go gauge
-informer_go{branch="master",build_date="2019-09-18T19:50:30+0000",build_user="vagrant",go_version="go1.12.7",license="Apache-2.0",program="example",revision="f2211ec",url="https://github.com/cisco-cx/informer/example",version="f2211ec"} 1
+# TYPE program_info gauge
+program_info{branch="master",build_date="2019-09-18T19:50:30+0000",build_user="vagrant",language="go",language_version="go1.12.7",license="Apache-2.0",program="example",revision="f2211ec",url="https://github.com/cisco-cx/informer/example",version="f2211ec"} 1
 ```
 
 ## Roadmap

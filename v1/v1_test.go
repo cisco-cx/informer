@@ -50,12 +50,13 @@ func TestInfoService_Basic(t *testing.T) {
 		"url",
 		"user",
 		"date",
-		"goVersion",
+		"language",
+		"languageVersion",
 		"version",
 		"revision",
 		"branch",
 	)
-	infoExpect := "(metadata=(program=program, license=license, url=url), versionInfo=(version=version, branch=branch, revision=revision), buildInfo=(go=goVersion, user=user, date=date))"
+	infoExpect := "(metadata=(program=program, license=license, url=url), versionInfo=(version=version, branch=branch, revision=revision), buildInfo=(language=language, languageVersion=languageVersion, user=user, date=date))"
 	require.Equal(t, infoExpect, info.String())
 }
 
@@ -71,7 +72,8 @@ func TestInfoCollector_Basic(t *testing.T) {
 		"url",
 		"user",
 		"date",
-		"goVersion",
+		"language",
+		"languageVersion",
 		"version",
 		"revision",
 		"branch",
@@ -84,7 +86,7 @@ func TestInfoCollector_Basic(t *testing.T) {
 	defer prometheus.Unregister(c)
 
 	// Parse metrics.
-	require.Contains(getMetrics(t), `informer_go{branch="branch",build_date="date",build_user="user",go_version="goVersion",license="license",program="program",revision="revision",url="url",version="version"} 1`)
+	require.Contains(getMetrics(t), `program_info{branch="branch",build_date="date",build_user="user",language="language",language_version="languageVersion",license="license",program="program",revision="revision",url="url",version="version"} 1`)
 }
 
 // getMetrics bootstraps an http server and fetches current metrics.
